@@ -1,11 +1,4 @@
 <?php
-/*
-Plugin Name: YouTube Live Manager
-Description: Muestra un reproductor de YouTube Live mediante shortcode [ytlm_live], configurable desde el panel.
-Version: 1.0
-Author: Hernán Cardoso
-Author URI: https://www.linkedin.com/in/cardosohernan/
-*/
 
 if (!defined('ABSPATH')) exit;
 
@@ -15,14 +8,18 @@ function ytlm_shortcode_live() {
     $video_id = trim(get_option('ytlm_video_id'));
 
     // Si está apagado o no hay ID → mostrar placa
-    if (!$enabled || empty($video_id)) {
+    if ($enabled && empty($video_id)) {
         return '<div style="padding:40px; text-align:center; background:#eee; font-size:22px;">
                     Estamos por comenzar...
                 </div>';
     }
 
+    if(!$enabled || empty($video_id)) {
+        return '';
+    }
+
     // Renderizar player
-    $embed_url = "https://www.youtube.com/embed/$video_id?autoplay=1";
+    $embed_url = "https://www.youtube.com/embed/$video_id?autoplay=1&controls=1&rel=0";
 
     return "
         <div class='ytlm-live-wrapper' style='max-width:900px; margin:auto;'>
@@ -35,4 +32,4 @@ function ytlm_shortcode_live() {
         </div>
     ";
 }
-add_shortcode('ytlm_live', 'ytlm_shortcode_live');
+add_shortcode('ytbLive', 'ytlm_shortcode_live');

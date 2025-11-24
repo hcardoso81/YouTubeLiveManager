@@ -9,6 +9,9 @@ Author URI: https://www.linkedin.com/in/cardosohernan/
 
 if (!defined('ABSPATH')) exit;
 
+require_once plugin_dir_path(__FILE__) . 'admin/admin-page.php';
+require_once plugin_dir_path(__FILE__) . 'short_code.php';
+
 function ytlm_register_settings() {
     add_option('ytlm_enabled', '0');
     add_option('ytlm_video_id', '');
